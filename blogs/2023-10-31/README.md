@@ -1,5 +1,21 @@
 ### CdePkgBlog 2023-10-31
 # Calibration of TSC-based software timer
+**Formeln**
+
+$$f(x) = \sum\limits_1^k 4x - \frac{1}{x}$$
+
+
+$$\frac{100\text{\%} }{363} = \frac{x }{362}$$
+**1234**
+
+$$\text{%} = \frac{x_2 - x_1}{x_1} \times 100$$
+
+**123456**
+$${\text{\1 change}} = \frac{x_2 - x_1}{x_1} \times 100$$
+
+**The Cauchy-Schwarz Inequality**
+$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+## %%  ######################################################
 
 <img src="TSC.jpg" alt="drawing" style="width:600px;"/>
 
@@ -55,20 +71,6 @@ But once the POST is gone and Windows/Linux/MaxOS has started, the *nominal freq
 ![ERRORRANGE](ERRORRANGE.png)
 
 
-**Formeln**
-
-$$f(x) = \sum\limits_1^k 4x - \frac{1}{x}$$
-
-
-$$\frac{100\text{\%} }{363} = \frac{x }{362}$$
-**1234**
-
-$$\text{\% change} = \frac{x_2 - x_1}{x_1} \times 100$$
-
-**1234**
-$${\text{\% change}} = \frac{x_2 - x_1}{x_1} \times 100$$
-
-## %%  ######################################################
 But as long 
 
 %%
