@@ -3,8 +3,6 @@
 
 <img src="TSC.jpg" alt="drawing" style="width:600px;"/>
 
-
-
 ### Table of content
 * [Abstract](README.md#abstract)
 * [Introduction](README.md#Introduction)
@@ -61,10 +59,19 @@ But once the POST is gone and Windows/Linux/MaxOS has started, the *nominal freq
 
 $$f(x) = \sum\limits_1^k 4x - \frac{1}{x}$$
 
-########################################################
+
+$$\frac{100\text{\%} }{363} = \frac{x }{362}$$
+**1234**
+
+$$\text{\% change} = \frac{x_2 - x_1}{x_1} \times 100$$
+
+**1234**
+$${\text{\% change}} = \frac{x_2 - x_1}{x_1} \times 100$$
+
+## %%  ######################################################
 But as long 
 
-
+%%
 
 "The ACPI Component Architecture (ACPICA) project provides an operating system (OS)-independent reference 
 implementation of the Advanced Configuration and Power Interface Specification (ACPI). 
