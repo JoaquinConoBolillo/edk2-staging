@@ -56,7 +56,7 @@ to a *DRIFT PER DAY*
 
 
 ## Technical background
-### *nominal frequency*
+### *nominal frequency / base speed* 
 These *nominal frequency* or *base speed* may differ for different CPU models and must be determined in a calibration process.
 The *nominal frequency* may also change with modified *over clock* settings or *cTDP* (configurable thermal design power) settings.
 But once the POST is gone and Windows/Linux/MaxOS has started, the *nominal frequency* will not change anymore.
@@ -67,6 +67,9 @@ But once the POST is gone and Windows/Linux/MaxOS has started, the *nominal freq
 
 
 ![clockN](clockN.png)
+
+### Clocks
+
 
 ![ERRORRANGE](ERRORRANGE.png)
 
