@@ -26,7 +26,7 @@ $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \
     * [introductory videos](README.md#introductory-videos)
 
 ## Abstract
-<<<<<<< HEAD
+
 This article discusses three different design flaws in the 
 the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
 that prevents UEFI from using the TSC as a relieable time base.
@@ -87,7 +87,7 @@ legacy i8254 PIT and the ACPI PMTimer.
 
 The *error corrected* calibration results are compared against results taken with *error correction* disabled,
 to make proof, that **error correction** is an **essential requirement** on effectively  existing hardware.
-=======
+
 This article discusses three different fundamental flaws in the 
 the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
 that prevents UEFI from using the TSC as a time base.
@@ -96,13 +96,12 @@ Many measurement tables and diagrams demonstrate true physical nature of the
 technical environment, where the calibration process happens -- that is a x86 UEFI platform.
 
 Additionally a corrected version of the calibration routine is introduced for
-legacy i8254 PIT and the ACPI PMTimer.
+legacy i8254 PIT and the ACPI PMTimer, with erroro correction added.
 
 The error corrected calibration results are compared against results taken with error correction disabled,
 to make proof, that error correction is an essential requirement.
 
 
->>>>>>> 6c2de3c567f4ac456fa0e0c1413d39cdaf41b049
 
 ## Introduction
 The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf)
