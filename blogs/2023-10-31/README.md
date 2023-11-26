@@ -112,8 +112,15 @@ The **invariant TSC** feature was introduced on AMD/Barcelona and Intel/Nehalem
 architecture back in the years 2007/2008, two years before UEFI became the predominant 
 BIOS architecture for new PC models on the market.
 
-**UEFI** specifies the `EFI_TIMESTAMP_PROTOCOL`. This interface allows to query the base frequency of a system (`EFI_TIMESTAMP_PROPERTIES.Frequency`).
-Regrettably its invocation returns in most cases eighter imprecise results for the **base frequency**
+**UEFI** specifies the `EFI_TIMESTAMP_PROTOCOL`. 
+But this protocol is not available on all systems
+This interface allows to query the base frequency of a system (`EFI_TIMESTAMP_PROPERTIES.Frequency`).
+Regrettably its invocation 
+
+```C
+    Status = SystemTable->BootServices->LocateProtocol(&efi_timestamp_protocol_guid, NULL, &pEFI_TIMESTAMP_PROTOCOL);
+```
+offers in most cases eighter imprecise results of the **base frequency** (that means the result drifts in MHz over different boots) or 
 
 ## Goals 1,2,3
 The root cause for the failing of the **tianocore UEFI** functions [`InternalCalculateTscFrequency()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
