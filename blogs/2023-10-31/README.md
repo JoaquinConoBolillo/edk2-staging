@@ -26,6 +26,68 @@ $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \
     * [introductory videos](README.md#introductory-videos)
 
 ## Abstract
+<<<<<<< HEAD
+This article discusses three different design flaws in the 
+the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
+that prevents UEFI from using the TSC as a relieable time base.
+https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340
+
+```C
+    UINT64
+    InternalCalculateTscFrequency (
+      VOID
+      )
+    {
+      UINT64   StartTSC;
+      UINT64   EndTSC;
+      UINT16   TimerAddr;
+      UINT32   Ticks;
+      UINT64   TscFrequency;
+      BOOLEAN  InterruptState;
+
+      InterruptState = SaveAndDisableInterrupts ();
+
+      TimerAddr = InternalAcpiGetAcpiTimerIoPort ();
+      //
+      // Compute the number of ticks to wait to measure TSC frequency.
+      // Use 363 * 9861 = 3579543 Hz which is within 2 Hz of ACPI_TIMER_FREQUENCY.
+      // 363 counts is a calibration time of 101.4 uS.
+      //
+      Ticks = IoBitFieldRead32 (TimerAddr, 0, 23) + 363;
+
+      StartTSC = AsmReadTsc ();                                         // Get base value for the TSC
+      //
+      // Wait until the ACPI timer has counted 101.4 us.
+      // Timer wrap-arounds are handled correctly by this function.
+      // When the current ACPI timer value is greater than 'Ticks',
+      // the while loop will exit.
+      //
+      while (((Ticks - IoBitFieldRead32 (TimerAddr, 0, 23)) & BIT23) == 0) {
+        CpuPause ();
+      }
+
+      EndTSC = AsmReadTsc ();                                           // TSC value 101.4 us later
+
+      TscFrequency = MultU64x32 (
+                       (EndTSC - StartTSC),                             // Number of TSC counts in 101.4 us
+                       9861                                             // Number of 101.4 us in a second
+                       );
+
+      SetInterruptState (InterruptState);
+
+      return TscFrequency;
+    }
+```
+
+Measurement tables and diagrams demonstrate true physical nature of the
+technical environment, where the calibration process happens -- that is a x86 UEFI platform.
+
+Additionally a corrected (*error corrected*) version of the calibration routine is given for
+legacy i8254 PIT and the ACPI PMTimer.
+
+The *error corrected* calibration results are compared against results taken with *error correction* disabled,
+to make proof, that **error correction** is an **essential requirement** on effectively  existing hardware.
+=======
 This article discusses three different fundamental flaws in the 
 the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
 that prevents UEFI from using the TSC as a time base.
@@ -40,23 +102,24 @@ The error corrected calibration results are compared against results taken with 
 to make proof, that error correction is an essential requirement.
 
 
+>>>>>>> 6c2de3c567f4ac456fa0e0c1413d39cdaf41b049
 
 ## Introduction
 The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf)
+
+After having trouble for more than a decade after the introduction of the **TSC** on *PENTIUM(tm)* processor in 1993, 
+using the TSC as a high resolution clock that could be used in BIOS and operating systems for calendar and timing tasks,
+those issues were suddenly gone when **TSC** became **invariant**, that means that for all
+P-states **TSC** is running at the same **nominal frequency**.
 
 The **invariant TSC** feature was introduced on AMD/Barcelona and Intel/Nehalem
 architecture back in the years 2007/2008, two years before UEFI became the predominant 
 BIOS architecture for new PC models on the market.
 
-Each CPU core owns a TSC, a 64Bit counter running at CPU speed.
-
-After having trouble for more than a decade, using the TSC as a high resolution
-clock that could be used in BIOS and operating systems for calendar and timing tasks,
-those issues were suddenly gone when **TSC** gots invariant (for all P-states running at the same *nominal frequency*).
-
-## Goal
-The root cause for the dysfunctionality of **invariant TSC** for calendar and timing 
-purpose in UEFI is obviously.
+## Goals
+The root cause for the failing of the **tianocore UEFI** functions [`InternalCalculateTscFrequency()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
+and [`InternalAcpiDelay()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L140)
+is obviously in the sourcecode given above, once the meaning of the obscure coding is understood.
 
 But to find and *verify* a proper calibration parameter a measurement and data logging program 
 was developed, that allows graphical presentation and analysis quickly and easily using Microsoft EXCEL.
