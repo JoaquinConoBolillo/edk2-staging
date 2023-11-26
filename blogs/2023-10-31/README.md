@@ -92,9 +92,6 @@ This article discusses three different fundamental flaws in the
 the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
 that prevents UEFI from using the TSC as a time base.
 
-Many measurement tables and diagrams demonstrate true physical nature of the
-technical environment, where the calibration process happens -- that is a x86 UEFI platform.
-
 Additionally a corrected version of the calibration routine is introduced for
 legacy i8254 PIT and the ACPI PMTimer, with erroro correction added.
 
@@ -106,8 +103,8 @@ to make proof, that error correction is an essential requirement.
 ## Introduction
 The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf)
 
-After having trouble for more than a decade after the introduction of the **TSC** on *PENTIUM(tm)* processor in 1993, 
-using the TSC as a high resolution clock that could be used in BIOS and operating systems for calendar and timing tasks,
+After having trouble for more than a decade after the introduction of the **TSC** on **PENTIUM** processor in 1993, 
+that prevents from using the **TSC** as a high resolution clock in BIOS and operating systems for calendar and timing tasks,
 those issues were suddenly gone when **TSC** became **invariant**, that means that for all
 P-states **TSC** is running at the same **nominal frequency**.
 
@@ -115,13 +112,18 @@ The **invariant TSC** feature was introduced on AMD/Barcelona and Intel/Nehalem
 architecture back in the years 2007/2008, two years before UEFI became the predominant 
 BIOS architecture for new PC models on the market.
 
-## Goals
+**UEFI** specifies the `EFI_TIMESTAMP_PROTOCOL`. This interface allows to query the base frequency of a system (`EFI_TIMESTAMP_PROPERTIES.Frequency`).
+Regrettably its invocation returns in most cases eighter imprecise results for the **base frequency**
+
+## Goals 1,2,3
 The root cause for the failing of the **tianocore UEFI** functions [`InternalCalculateTscFrequency()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
 and [`InternalAcpiDelay()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L140)
-is obviously in the sourcecode given above, once the meaning of the obscure coding is understood.
+is obviously in the sourcecode given above, once the meaning of the *tianocore UEFI specific* coding is understood.
 
-But to find and *verify* a proper calibration parameter a measurement and data logging program 
-was developed, that allows graphical presentation and analysis quickly and easily using Microsoft EXCEL.
+
+
+But to find and *verify* proper calibration parameter a measurement and data logging program 
+was developed, that allows graphical presentation and analysis quickly and easily using Microsoft EXCEL and compatible spreadsheet programs.
 
 [Visual-TSCSync-for-UEFI-Shell](https://github.com/KilianKegel/Visual-TSCSync-for-UEFI-Shell#visual-tscsync-for-uefi-shell)
 collects timing data for different calibration durations and scales repeated measurement results
