@@ -89,14 +89,14 @@ The *error-corrected* calibration results are compared against results taken wit
 to make proof, that **error correction** is an **essential requirement** on effectively  existing hardware.
 
 Additionally a corrected version of the calibration routine is introduced for
-legacy i8254 PIT and the ACPI PMTimer, with erroro correction added.
+legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 
 
 ## Introduction
 The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf)
 
 After having trouble for more than a decade after the introduction of the **TSC** on **PENTIUM** processor in 1993, 
-that prevents from using the **TSC** as a high resolution clock in BIOS and operating systems for calendar and timing tasks,
+that prevents the PC industry from using the **TSC** as a high resolution clock in BIOS and operating systems for calendar and timing tasks,
 those issues were suddenly gone when **TSC** became **invariant**, that means that for all
 P-states **TSC** is running at the same **nominal frequency**.
 
@@ -105,18 +105,26 @@ architecture back in the years 2007/2008, two years before UEFI became the predo
 BIOS architecture for new PC models on the market.
 
 **UEFI** specifies the `EFI_TIMESTAMP_PROTOCOL`. 
-But this protocol is not available on all systems
 This interface allows to query the base frequency of a system (`EFI_TIMESTAMP_PROPERTIES.Frequency`).
 Regrettably its invocation 
 
 ```C
     Status = SystemTable->BootServices->LocateProtocol(&efi_timestamp_protocol_guid, NULL, &pEFI_TIMESTAMP_PROTOCOL);
 ```
-offers in most cases eighter imprecise results of the **base frequency** (that means the result drifts in MHz over different boots) or 
+offers in most cases eighter 
+* imprecise results of the **base frequency** (that means the result drifts in the MHz-range over different boots)
+
+or
+* 
+
+or
+* this protocol is not available on all systems.
+
+
 
 ## Goals 1,2,3
-The root cause for the failing of the **tianocore UEFI** functions [`InternalCalculateTscFrequency()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
-and [`InternalAcpiDelay()`](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L140)
+The root cause for the failing of the **tianocore UEFI** functions [**`InternalCalculateTscFrequency()`**](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
+and [**`InternalAcpiDelay()`**](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L140)
 is obviously in the sourcecode given above, once the meaning of the *tianocore UEFI specific* coding is understood.
 
 
