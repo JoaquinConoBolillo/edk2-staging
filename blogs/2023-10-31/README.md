@@ -113,24 +113,26 @@ Regrettably its invocation
 ```
 offers in most cases eighter 
 * imprecise results of the **base frequency**<br>(that means the result drifts in the MHz-range over different boots), or
-* completely malformed result, e.g. on one of my systems reports 3579545MHz, that pretty much reminds to the [ACPI base frequency](https://uefi.org/sites/default/files/resources/ACPI_Spec_6_5_Aug29.pdf#page=132), or
+* completely malformed result, e.g. one of my systems reports 3579545Hz, that pretty much reminds to the [ACPI base frequency](https://uefi.org/sites/default/files/resources/ACPI_Spec_6_5_Aug29.pdf#page=132), or
 * this protocol is not available
 
 
 
-## Goals 1,2,3
+## Goals
 The root cause for the failing of the **tianocore UEFI** functions [**`InternalCalculateTscFrequency()`**](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
 and [**`InternalAcpiDelay()`**](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L140)
 is obviously in the sourcecode given above, once the meaning of the *tianocore UEFI specific* coding is understood.
 
-
-
-But to find and *verify* proper calibration parameter a measurement and data logging program 
+To find and *validate* proper calibration parameter a measurement and data logging program 
 was developed, that allows graphical presentation and analysis quickly and easily using Microsoft EXCEL and compatible spreadsheet programs.
 
 [Visual-TSCSync-for-UEFI-Shell](https://github.com/KilianKegel/Visual-TSCSync-for-UEFI-Shell#visual-tscsync-for-uefi-shell)
 collects timing data for different calibration durations and scales repeated measurement results
 to a *DRIFT PER DAY*
+
+### Goal 1
+Unveiling the secret of failing **TSC** calibration at **tianocore UEFI**. This knowledge seems to be necessary to tell,
+since it was many 
 
 
 ## Technical background
