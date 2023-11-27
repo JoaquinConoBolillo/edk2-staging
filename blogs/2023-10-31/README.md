@@ -116,7 +116,7 @@ offers in most cases eighter
 * completely malformed result, e.g. one of my systems reports 3579545Hz, that pretty much reminds to the [ACPI base frequency](https://uefi.org/sites/default/files/resources/ACPI_Spec_6_5_Aug29.pdf#page=132), or
 * this protocol is not available
 
-
+On systems available to me only a few parts report an relieable result.
 
 ## Goals
 The root cause for the failing of the **tianocore UEFI** functions [**`InternalCalculateTscFrequency()`**](https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340) 
@@ -131,12 +131,20 @@ collects timing data for different calibration durations and scales repeated mea
 to a *DRIFT PER DAY*
 
 ### Goal 1
-Unveiling the secret of failing **TSC** calibration at **tianocore UEFI**. This knowledge seems to be necessary to tell,
-since it was unuseable for many years until an Intel-specific (not AMD!) solution was introduced, that requires
+Unveiling the secret of failing **TSC** calibration algorithm at **tianocore UEFI**,
+that was workarounded on recent processors only (*Alderlake*) with an Intel-specific (not AMD) solution, that requires
 an extension of the instructionset (**CPUID** *Time Stamp Counter and Nominal Core Crystal Clock Information Leaf*).
 
+This knowledge seems to be necessary to tell, to prevent engineers (e.g. UEFI BIOS vendors) from running into the same
+widely distributed fallacy of thinking on other processor architectures.
+
 ### Goal 2
-Demonstration of a proven algorithm, that is also portable to other processor architectures
+Demonstration of a proven algorithm that includes an *error correction* and is also portable to other processor architectures.
+
+### Goal 3
+Point out, that such kind of failure was possible only
+
+
 
 ## Technical background
 ### *nominal frequency / base speed* 
