@@ -132,8 +132,11 @@ to a *DRIFT PER DAY*
 
 ### Goal 1
 Unveiling the secret of failing **TSC** calibration at **tianocore UEFI**. This knowledge seems to be necessary to tell,
-since it was many 
+since it was unuseable for many years until an Intel-specific (not AMD!) solution was introduced, that requires
+an extension of the instructionset (**CPUID** *Time Stamp Counter and Nominal Core Crystal Clock Information Leaf*).
 
+### Goal 2
+Demonstration of a proven algorithm, that is also portable to other processor architectures
 
 ## Technical background
 ### *nominal frequency / base speed* 
