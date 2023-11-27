@@ -112,13 +112,13 @@ Regrettably its invocation
     Status = SystemTable->BootServices->LocateProtocol(&efi_timestamp_protocol_guid, NULL, &pEFI_TIMESTAMP_PROTOCOL);
 ```
 offers in most cases eighter 
-* imprecise results of the **base frequency** (that means the result drifts in the MHz-range over different boots)
+* imprecise results of the **base frequency**<br>(that means the result drifts in the MHz-range over different boots)
 
 or
-* 
+* completely malformed result, e.g. on one of my systems reports 3579545MHz, that pretty much reminds to the [ACPI base frequency](https://uefi.org/sites/default/files/resources/ACPI_Spec_6_5_Aug29.pdf#page=132)
 
 or
-* this protocol is not available on all systems.
+* this protocol is not available
 
 
 
