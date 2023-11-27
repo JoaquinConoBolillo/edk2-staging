@@ -28,7 +28,7 @@ $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \
 ## Abstract
 
 This article discusses three different design flaws in the 
-the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
+the calibration process of the *timestamp counter* **TSC** on all x86 UEFI platforms 
 that prevents UEFI from using the TSC as a relieable time base.
 https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340
 
@@ -85,19 +85,11 @@ technical environment, where the calibration process happens -- that is a x86 UE
 Additionally a corrected (*error corrected*) version of the calibration routine is given for
 legacy i8254 PIT and the ACPI PMTimer.
 
-The *error corrected* calibration results are compared against results taken with *error correction* disabled,
+The *error-corrected* calibration results are compared against results taken with *non-error-correction*,
 to make proof, that **error correction** is an **essential requirement** on effectively  existing hardware.
-
-This article discusses three different fundamental flaws in the 
-the calibration process of the TSC Time Stamp Counter on all x86 UEFI platforms 
-that prevents UEFI from using the TSC as a time base.
 
 Additionally a corrected version of the calibration routine is introduced for
 legacy i8254 PIT and the ACPI PMTimer, with erroro correction added.
-
-The error corrected calibration results are compared against results taken with error correction disabled,
-to make proof, that error correction is an essential requirement.
-
 
 
 ## Introduction
