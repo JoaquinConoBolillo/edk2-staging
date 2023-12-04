@@ -4,7 +4,11 @@
 
 T<sub>day</sub> = 86400s
 
-$$f(x) = T_{day}\cdot  (1 - \frac{x \pm 1}{x})$$
+n = Number of clocks
+
+T<sub>drift</sub> = f(n)
+
+$$f(n) = T_{day}\cdot  (1 - \frac{n \pm 1}{n})$$
 
 
 $$f(x) = \sum\limits_1^k 4x - \frac{1}{x}$$
