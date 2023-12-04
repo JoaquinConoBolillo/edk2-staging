@@ -2,6 +2,11 @@
 # Calibration of TSC-based software timer
 **Formeln**
 
+T<sub>day</sub> = 86400s
+
+$$f(x) = T_{day}\cdot  (1 - \frac{x \pm 1}{x})$$
+
+
 $$f(x) = \sum\limits_1^k 4x - \frac{1}{x}$$
 
 
