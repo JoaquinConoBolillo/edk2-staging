@@ -100,7 +100,7 @@ The **invariant TSC** feature was introduced on AMD/Barcelona and Intel/Nehalem
 architecture back in the years 2007/2008, two years before UEFI became the predominant 
 BIOS architecture for new PC models on the market.
 
-**UEFI** specifies the `EFI_TIMESTAMP_PROTOCOL`. 
+**UEFI** specifies the [**`EFI_TIMESTAMP_PROTOCOL`**](https://uefi.org/sites/default/files/resources/UEFI_Spec_2_9_2021_03_18.pdf#page=2248). 
 This interface allows to query the base frequency of a system (`EFI_TIMESTAMP_PROPERTIES.Frequency`).
 Regrettably its invocation 
 
