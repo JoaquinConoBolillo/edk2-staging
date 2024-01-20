@@ -95,7 +95,7 @@ Truly the **TSC** is more a *counter* but a *timer*, since it is just a single, 
 in each CPU core, that is incremented with every base clock.
 
 **TSC** is readable by the *READ TSC* instruction [**RDTSC**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf#PAGE=547)
-and writable by the by the *WRITE MSR* instruction [**WRMSR**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2c-manual.pdf#PAGE=547)
+and writable by the by the *WRITE MSR 0x10* instruction [**WRMSR**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2c-manual.pdf#PAGE=574)
 
 
 
