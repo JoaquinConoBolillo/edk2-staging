@@ -35,8 +35,8 @@ Measurement tables and diagrams demonstrate true physical nature and its math ba
 technical environment of the calibration process -- that is a **Tianocore UEFI** x86 platform.
 
 [**"TSCSYNC"**](https://github.com/KilianKegel/Visual-TSCSync-for-UEFI-Shell#visual-tscsync-for-uefi-shell),
-a menu driven reference and measurement OSIF implementation was provided to enable humans to reproduce
-ideas on their present platfoms.
+a menu driven reference and measurement UEFI SHELL program was developed to enable to reproduction and validation
+of my thesis on their present platfoms.
 
 
 
