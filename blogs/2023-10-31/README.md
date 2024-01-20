@@ -27,16 +27,19 @@ This article discusses various design flaws in the
 the calibration process of the *timestamp counter* **TSC** on all **Tianocore UEFI** based x86 platforms
 that prevents UEFI from using the TSC as a time base for wall clock and calendar computation on **BIOS** and **POST**.
 
-A corrected calibration process is introdused, that allows high precision and low drift of related
+A corrected calibration process is introduced, that allows high precision and low drift of related
 wall clock, calendar and timing operations on a PC running software on **Tianocore UEFI**, 
 ported from other platforms or implemented on widly accepted industry practices -- using Standard C Library API.
 
-
-https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340
-
-
 Measurement tables and diagrams demonstrate true physical nature of the
-technical environment, where the calibration process happens -- that is a x86 UEFI platform.
+technical environment of the calibration process -- that is a x86 UEFI platform.
+
+Math basics are explained.
+
+[**"TSCSYNC"**](https://github.com/KilianKegel/Visual-TSCSync-for-UEFI-Shell#visual-tscsync-for-uefi-shell),
+a menu driven reference and measurement OSIF implementation was provided to enable humans to reproduce
+ideas on their present platfoms.
+
 
 Additionally a corrected (*error corrected*) version of the calibration routine is given for
 legacy i8254 PIT and the ACPI PMTimer.
