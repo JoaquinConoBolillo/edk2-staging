@@ -28,8 +28,9 @@ the calibration process of the *timestamp counter* **TSC** on all **Tianocore UE
 that prevents UEFI from using the TSC as a time base for wall clock and calendar computation on **BIOS** and **POST**.
 
 A corrected calibration process is introdused, that allows high precision and low drift of related
-wall clock, calendar and timing operations on a PC running **Tianocore UEFI** based software.
-accepted industry practices
+wall clock, calendar and timing operations on a PC running software on **Tianocore UEFI**, 
+ported from other platforms or implemented on widly accepted industry practices -- using Standard C Library API.
+
 
 https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340
 
