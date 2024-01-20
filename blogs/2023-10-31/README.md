@@ -31,24 +31,13 @@ A corrected calibration process is introduced, that allows high precision and lo
 wall clock, calendar and timing operations on a PC running software on **Tianocore UEFI**, 
 ported from other platforms or implemented on widly accepted industry practices -- using Standard C Library API.
 
-Measurement tables and diagrams demonstrate true physical nature of the
-technical environment of the calibration process -- that is a x86 UEFI platform.
-
-Math basics are explained.
+Measurement tables and diagrams demonstrate true physical nature and its math basics of the
+technical environment of the calibration process -- that is a **Tianocore UEFI** x86 platform.
 
 [**"TSCSYNC"**](https://github.com/KilianKegel/Visual-TSCSync-for-UEFI-Shell#visual-tscsync-for-uefi-shell),
 a menu driven reference and measurement OSIF implementation was provided to enable humans to reproduce
 ideas on their present platfoms.
 
-
-Additionally a corrected (*error corrected*) version of the calibration routine is given for
-legacy i8254 PIT and the ACPI PMTimer.
-
-The *error-corrected* calibration results are compared against results taken with *non-error-correction*,
-to make proof, that **error correction** is an **essential requirement** on effectively  existing hardware.
-
-Additionally a corrected version of the calibration routine is introduced for
-legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 
 
 ## Introduction
