@@ -91,19 +91,23 @@ legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 ## Introduction
 *The TSC is the finest grained, widest, and most convenient timer device to access.* [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf#page=8)
 
-Truly the **TSC** is more a *counter* but a *timer*, since it is just a single, binary 64 bit registerfield (MSR -- model-specific registe)
-in each CPU core, that is incremented with every base clock.
+Truly the **TSC** compares better to *counter* but to a *timer*, since it is just a single, binary 64 bit registerfield in each CPU core,
+that is incremented with every base clock.
 
 **TSC** is readable by the *READ TSC* instruction [**RDTSC**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf#PAGE=547)
 and writable by the by the *WRITE MSR 0x10* instruction [**WRMSR**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2c-manual.pdf#PAGE=574)
+
+With the disappearance of RESET the **TSC** starts counting upwards from 0.[2](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.pdf#page=152)
+
 
 
 
 ### Historical background
 After having trouble for more than a decade after the introduction of the **TSC** on **PENTIUM** processor in 1993, 
+
 that prevents the PC industry from using the **TSC** as a high resolution clock in BIOS and operating systems for calendar and timing tasks,
 those issues were suddenly gone when **TSC** became **invariant**, that means that for all
-P-states **TSC** is running at the same **nominal frequency**.
+ACPI P-, C-. and T-states **TSC** is running at the same **nominal frequency**.
 
 The **invariant TSC** feature was introduced on AMD/Barcelona and Intel/Nehalem
 architecture back in the years 2007/2008, two years before UEFI became the predominant 
