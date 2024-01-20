@@ -23,57 +23,16 @@ $$f(n) = T_{day}\cdot  (1 - \frac{n \pm 1}{n})$$
 
 ## Abstract
 
-This article discusses three different design flaws in the 
-the calibration process of the *timestamp counter* **TSC** on all x86 UEFI platforms 
-that prevents UEFI from using the TSC as a relieable time base.
+This article discusses various design flaws in the 
+the calibration process of the *timestamp counter* **TSC** on all **Tianocore UEFI** based x86 platforms
+that prevents UEFI from using the TSC as a time base for wall clock and calendar computation on **BIOS** and **POST**.
+
+A corrected calibration process is introdused, that allows high precision and low drift of related
+wall clock, calendar and timing operations on a PC running **Tianocore UEFI** based software.
+accepted industry practices
+
 https://github.com/tianocore/edk2/blob/5220bd211df890f2672c23c050082862cd1e82d6/PcAtChipsetPkg/Library/AcpiTimerLib/AcpiTimerLib.c#L340
 
-```C
-    UINT64
-    InternalCalculateTscFrequency (
-      VOID
-      )
-    {
-      UINT64   StartTSC;
-      UINT64   EndTSC;
-      UINT16   TimerAddr;
-      UINT32   Ticks;
-      UINT64   TscFrequency;
-      BOOLEAN  InterruptState;
-
-      InterruptState = SaveAndDisableInterrupts ();
-
-      TimerAddr = InternalAcpiGetAcpiTimerIoPort ();
-      //
-      // Compute the number of ticks to wait to measure TSC frequency.
-      // Use 363 * 9861 = 3579543 Hz which is within 2 Hz of ACPI_TIMER_FREQUENCY.
-      // 363 counts is a calibration time of 101.4 uS.
-      //
-      Ticks = IoBitFieldRead32 (TimerAddr, 0, 23) + 363;
-
-      StartTSC = AsmReadTsc ();                                         // Get base value for the TSC
-      //
-      // Wait until the ACPI timer has counted 101.4 us.
-      // Timer wrap-arounds are handled correctly by this function.
-      // When the current ACPI timer value is greater than 'Ticks',
-      // the while loop will exit.
-      //
-      while (((Ticks - IoBitFieldRead32 (TimerAddr, 0, 23)) & BIT23) == 0) {
-        CpuPause ();
-      }
-
-      EndTSC = AsmReadTsc ();                                           // TSC value 101.4 us later
-
-      TscFrequency = MultU64x32 (
-                       (EndTSC - StartTSC),                             // Number of TSC counts in 101.4 us
-                       9861                                             // Number of 101.4 us in a second
-                       );
-
-      SetInterruptState (InterruptState);
-
-      return TscFrequency;
-    }
-```
 
 Measurement tables and diagrams demonstrate true physical nature of the
 technical environment, where the calibration process happens -- that is a x86 UEFI platform.
@@ -92,12 +51,13 @@ legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 *The TSC is the finest grained, widest, and most convenient timer device to access.* [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf#page=8)
 
 Truly the **TSC** compares better to a *counter* but to a *timer*, since it is just a single, binary 64 bit registerfield in each CPU core,
-that is incremented with every base clock.
+that is incremented with every base clock. **TSC** doesn't offer any other feature usually known from *timer devices*, like event generation,
+*count down* functionality.
 
 **TSC** is readable by the *READ TSC* instruction [**RDTSC**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf#PAGE=547)
 and writable by the by the *WRITE MSR 0x10* instruction [**WRMSR**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2c-manual.pdf#PAGE=574)
 
-With the disappearance of RESET signal on a  platform the **TSC** starts counting upwards from 0. [2](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.pdf#page=152)
+With the disappearance of RESET signal on a  platform the **TSC** starts counting upwards from 0. [(2)](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.pdf#page=152)
 
 
 
