@@ -38,6 +38,9 @@ technical environment of the calibration process -- that is a **Tianocore UEFI**
 a menu driven reference and measurement UEFI SHELL program was developed to enable to reproduction and validation
 of my thesis on their present platfoms.
 
+**NOTE:** This paper will focus on **TSC** related issues on a simple, single threaded "operating system" **Tianocore UEFI** only. 
+Multi-thread related perspective is irrrelevant for this purpose.
+
 
 
 ## Introduction
