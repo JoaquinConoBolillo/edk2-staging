@@ -91,13 +91,13 @@ legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 ## Introduction
 *The TSC is the finest grained, widest, and most convenient timer device to access.* [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf#page=8)
 
-Truly the **TSC** compares better to *counter* but to a *timer*, since it is just a single, binary 64 bit registerfield in each CPU core,
+Truly the **TSC** compares better to a *counter* but to a *timer*, since it is just a single, binary 64 bit registerfield in each CPU core,
 that is incremented with every base clock.
 
 **TSC** is readable by the *READ TSC* instruction [**RDTSC**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf#PAGE=547)
 and writable by the by the *WRITE MSR 0x10* instruction [**WRMSR**](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2c-manual.pdf#PAGE=574)
 
-With the disappearance of RESET the **TSC** starts counting upwards from 0.[2](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.pdf#page=152)
+With the disappearance of RESET signal on a  platform the **TSC** starts counting upwards from 0. [2](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-3b-part-2-manual.pdf#page=152)
 
 
 
