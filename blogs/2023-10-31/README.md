@@ -89,7 +89,7 @@ legacy i8254 PIT and the ACPI PMTimer, with error correction added.
 
 
 ## Introduction
-The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf)
+The TSC is the finest grained, widest, and most convenient timer device to access. [(1)](https://www.opendata.uni-halle.de/bitstream/1981185920/12429/1/Fedotova_Irina_01.pdf#page=8)
 
 After having trouble for more than a decade after the introduction of the **TSC** on **PENTIUM** processor in 1993, 
 that prevents the PC industry from using the **TSC** as a high resolution clock in BIOS and operating systems for calendar and timing tasks,
